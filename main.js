@@ -1,51 +1,21 @@
-var iniciar = document.getElementById('start');
-var resetar = document.getElementById('reset');
+let listaBtnsIniciar = document.querySelectorAll(".start");
+let listaBtnsResetar = document.querySelectorAll(".reset");
+let listaBtnsFechar = document.querySelectorAll(".remover-evento")
 
-var mes = document.getElementById('months');
-var dia = document.getElementById('days');
-var hora = document.getElementById('hour');
-var minuto = document.getElementById('minute');
-var segundo = document.getElementById('sec');
-
-var iniciarTimer = null;
-
-iniciar.addEventListener('click', function () {
-  function iniciarIntervalo() {
-    iniciarTimer = setInterval(function () {
-      timer();
-    }, 1000);
+let listaDeEventos = [
+  {
+    nome: "Tirar a pizza do forno",
+    tempo: "0-0-0-30-0"
+  },
+  {
+    nome: "Intervalo de Almoço",
+    tempo: "0-0-1-0-0"
   }
-  iniciarIntervalo();
-});
+]
 
-resetar.addEventListener('click', function () {
-  mes.value = 0;
-  dia.value = 0;
-  hora.value = 0;
-  minuto.value = 0;
-  segundo.value = 0;
+let numeroDeEventos = listaDeEventos.length
 
-  pararIntervalo();
-});
+// Inserção Inicial dos Evento
+iniciarUlEventos(listaDeEventos);
 
-function timer() {
-  if (segundo.value != 0) {
-    segundo.value--;
-  } else if (minuto.value != 0 && segundo.value == 0) {
-    segundo.value = 59;
-    minuto.value--;
-  } else if (hora.value != 0 && minuto.value == 0) {
-    minuto.value = 59;
-    hora.value--;
-  } else if (dia.value != 0 && hora.value == 0) {
-    hora.value = 24;
-    dia.value--;
-  } else if (mes.value != 0 && dia.value == 0) {
-    dia.value = 30;
-    mes.value--;
-  }
-}
-
-function pararIntervalo() {
-  clearInterval(iniciarTimer);
-}
+addTodosOsListeners()
